@@ -1,69 +1,71 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
-<head>
-	<meta charset="UTF-8" />
-	<title>见两小儿辩日</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<title>bootstrap-mod</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<style type="text/css">
+			.syso {
+				width: 100px;
+				height: 100%;
+				position: fixed;
+				float: left;
+				background-color: #333;
+				color: #f00;
+				top: 0;
+			}
+			
+			a {
+				color: #f00;
+			}
+			
+			.box {
+				padding-left: 150px;
+			}
+		</style>
+	</head>
 
-	<style type="text/css">
-		body {
-			padding: 0;
-			margin: 0;
-			font-family: "微软雅黑";
+	<body>
 
-		}
-
-		.box {				
-			max-width: 800px;
-			margin: 0 auto 20px;
-			padding-left: 1em;
-			padding-right: 1em;
-
-		}
-
-		.list-ul>li
-		{
-			line-height: 30px;
-		}
-
-		
-
-
-
-	</style>
-
-</head>
-
-<body>
-
-
-	<div class="box">
-		<h1 class="text-center">
-			见两小儿辩日 · 博客
-		</h1>
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<ul  class="list-unstyled list-ul" >
-
-
-					<li>
-						<span  class="label label-warning label-type">Java</span>
-						<span  class="label label-info label-type">2017年2月11日 >>></span>
-						<a href="list/Java/2017211.html"> 第一篇</a>
-					</li>
-
-
-				</ul>
-			</div>
+		<div class="syso">
 		</div>
 
+		<div class="box">
+			<h1>Title</h1>
+			<h1>Lun</h1>
+			<h1>Var</h1>
+			<h1>D</h1>
+			<h1>Java</h1>
+		</div>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 
+		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 
-		<script src="js/jquery.min.js" charset="utf-8"></script>
-		<script src="js/bootstrap.min.js" " charset="utf-8"></script>
+		<script type="text/javascript">
+			for(var i = 0; i <= 100; i++) {
+				$('.syso').after('<br/>');
+				$('.box').after('<br/>');
+			}
 
+			for(var i = 0; i <= 100; i++) {
+				$('.syso').after('<br/>');
+			}
 
+			$("h1").each(function() {
+
+				var h1 = $(this);
+				h1.attr('id', 'sq' + h1.text());
+
+				var a = $('<a></a>');
+				a.attr('href', '#sq' + h1.text());
+				a.text(h1.text());
+
+				$('.syso').append(a);
+				$('.syso').append('<br/>');
+			});
+		</script>
 	</body>
 
-	</html>
+</html>
