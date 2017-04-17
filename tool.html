@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<title>起源手册——文章管理器</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/loading.css" />
+		<style type="text/css">
+			::selection {
+				background-color: #f0ad4e;
+				color: #fff;
+				text-shadow: 0 2px 3px #000;
+			}
+			
+			body {
+				background-color: #333;
+				color: #ccc;
+			}
+			
+			.tool {
+				position: absolute;
+				height: 100vh;
+				overflow: auto;
+				width: 300px;
+				border-right: solid 1px #555555;
+				background-color: #474747;
+				z-index: 11;
+				top: 0;
+			}
+			
+			.tool-box {}
+			
+			.syso {
+				height: 100vh;
+				overflow: auto;
+				width: 100%;
+				border-right: solid 1px #555555;
+				background-color: #333;
+				padding-left: 300px;
+				position: absolute;
+				top: 0;
+				z-index: 10;
+			}
+			
+			.btn {
+				border-radius: 5px;
+				border: solid 1px #000;
+				background-color: #474747;
+				color: #eee;
+				background-image: linear-gradient(#585858, #444);
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				font-size: 12px;
+			}
+			
+			.btn:hover {
+				border: solid 1px #000;
+				color: #eee;
+				background-image: linear-gradient(#777, #444);
+			}
+			
+			.tool-title {
+				border-bottom: solid 1px #666666;
+				padding-bottom: 5px;
+				padding-top: 5px;
+			}
+			
+			.tool-box ul {
+				padding: 0 10px;
+			}
+			
+			.tool-box ul li {
+				display: block;
+				list-style: none;
+				text-align: left;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				margin: 10px 0;
+				font-size: 12px;
+			}
+			
+			.tool .tool-box ul li:nth-child(even) {}
+			
+			.tool-box ul li label {
+				width: 30%;
+				display: inline-block;
+				/*white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;*/
+				font-weight: normal;
+			}
+			
+			.tool-box ul li input {
+				width: 68%;
+				display: inline-block;
+			}
+			
+			input[type="text"] {
+				border: solid 1px #888888;
+				background-color: #252525;
+				color: #eee;
+				height: 25px;
+			}
+			
+			input[type="text"].form-control:focus {
+				border-color: #f0ad4e;
+				/**/
+				outline: 0;
+				outline: thin dotted\9;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: snone;
+			}
+			
+			button.btn.btn-default:active {
+				color: #eee;
+			}
+			
+			button.btn.btn-default:focus {
+				color: #eee;
+			}
+			/*#888888*/
+			
+			.syso a {
+				text-decoration: none;
+			}
+			
+			#upbox {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, .5);
+				z-index: 99;
+				font-size: 100px;
+				font-weight: bold;
+				text-align: center;
+				display: none;
+			}
+			
+			.li-border-top {
+				border-top: solid 1px #555555;
+			}
+			/*.li-border-top:nth-child(odd) {
+				border-left: solid 1px #f00;
+			}*/
+			
+			#upbox_jd {
+				border: dashed 8px #ddd;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				/*background-color: #f00;*/
+				z-index: 9999;
+			}
+			
+			.sk-spinner-double-bounce .sk-double-bounce1,
+			.sk-spinner-double-bounce .sk-double-bounce2 {
+				background-color: #eee;
+			}
+		</style>
+
+	</head>
+
+	<body id="bodyID">
+		<div id="upbox">
+			<div id="upbox_jd"></div>
+			<div class="upBox-title">upload file</div>
+			<span class="glyphicon glyphicon-file"></span>
+
+			<div id="tran" class="sk-spinner sk-spinner-double-bounce">
+				<div class="sk-double-bounce1"></div>
+				<div class="sk-double-bounce2"></div>
+			</div>
+
+		</div>
+		<div id="preview"></div>
+		<div class="tool">
+
+			<div class="tool-box">
+
+				<ul>
+					<li>
+						<button class="btn btn-default btn-block" id="sx" type="submit">刷新</button>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="tool-title">添加类别</div>
+					</li>
+					<li>
+						<label>类别名</label>
+						<input type="text" id="TypeName" class="form-control input-sm" placeholder="Type Name">
+					</li>
+					<li>
+						<label>标题</label>
+						<input type="text" id="TypeTitle" class="form-control input-sm" placeholder="Title">
+					</li>
+					<li>
+						<label>信息</label>
+						<input type="text" id="TypeInfo" class="form-control input-sm" placeholder="info">
+					</li>
+					<li>
+						<button class="btn btn-default btn-block" id="addType" type="submit">Add</button>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="tool-title">添加文章</div>
+					</li>
+					<li>
+						<label>节点</label>
+						<input type="text" id="Type" class="form-control input-sm" placeholder="Type">
+					</li>
+					<li>
+						<label>文章标题</label>
+						<input type="text" id="Title" class="form-control input-sm" placeholder="Title">
+					</li>
+					<li>
+						<label>文件名</label>
+						<input type="text" id="fileName" class="form-control input-sm" placeholder="File Name">
+					</li>
+					<li>
+						<label>时间</label>
+						<input type="text" class="form-control input-sm" id="time" placeholder="Time">
+					</li>
+					<li>
+						<button class="btn btn-default btn-block" id="addNode" type="submit">Add</button>
+					</li>
+				</ul>
+
+			</div>
+
+		</div>
+
+		<div class="syso">
+		</div>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/menu.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//阻止浏览器默认行。 
+			$(document).on({
+				dragleave: function(e) { //拖离 
+					e.preventDefault();
+				},
+				drop: function(e) { //拖后放 
+					e.preventDefault();
+				},
+				dragenter: function(e) { //拖进 
+					e.preventDefault();
+
+				},
+				dragover: function(e) { //拖来拖去 
+					e.preventDefault();
+				}
+			});
+			var bodyID = document.getElementById('bodyID'); //拖拽区域 
+			bodyID.addEventListener("dragenter", function(e) {
+				//拖进 		
+				$('#upbox').show();
+
+			}, false);
+
+			var upbox_jd = document.getElementById('upbox_jd'); //拖拽区域 
+			upbox_jd.addEventListener("dragover", function(e) {
+				//拖来拖去 
+				//				$('#upbox').show();
+
+			}, false);
+			upbox_jd.addEventListener("drop", function(e) {
+				//拖后放 
+				console.log(e.dataTransfer.files);
+				$('#upbox').hide();
+				e.preventDefault(); //取消默认浏览器拖拽效果 
+				var fileList = e.dataTransfer.files; //获取文件对象 
+				//检测是否是拖拽文件到页面的操作 
+				if(fileList.length == 0) {
+					return false;
+				}
+
+				var filename = fileList[0].name; //图片名称 
+
+
+				$('#fileName').val(filename)
+
+			}, false);
+
+			upbox_jd.addEventListener("dragleave", function(e) {
+				$('#upbox').hide();
+
+			}, false);
+
+			var fs = require("fs")
+
+			// 异步读取
+			fs.readFile('list_arr.json', function(err, data) {
+				if(err) {
+					alert(err + '错误');
+					return;
+				}
+
+				bList(data.toString())
+			});
+
+			function bList(_json) {
+				var obj = eval("(" + _json + ")"); //转换json
+
+				for(x in obj) {
+
+					var ul = $('<ul></ul>');
+					var li = $('<li></li>');
+
+					var span = $('<span></span>');
+					span.text(x);
+					span.attr('id', x);
+					span.addClass('label label-warning type');
+					var a = $('<a></a>');
+					a.attr('href', '#');
+
+					a.append(span);
+					li.append(a);
+
+					if(x == 'hr') {
+						ul.append(li);
+					} else {
+
+						var headUl = $('<ul></ul>');
+						var headBOX = $('<ul></ul>');
+
+						var headLi = $('<li></li>');
+						headLi.text('head');
+
+						var titleLi = $('<li></li>');
+						titleLi.text(obj[x].head.title);
+
+						var infoLi = $('<li></li>');
+						infoLi.text(obj[x].head.info);
+
+						headUl.append(headLi);
+						headLi.append(headBOX);
+
+						headBOX.append(titleLi);
+						headBOX.append(infoLi);
+
+						li.append(headUl);
+						ul.append(li);
+
+						var arrUl = $('<ul></ul>');
+						var arrLi = $('<li></li>');
+						arrLi.text('arr：' + obj[x].arr.length);
+						arrUl.append(arrLi);
+
+						var arrBox = $('<ul></ul>');
+						arrUl.append(arrBox);
+
+						for(y in obj[x].arr) {
+
+							var title = $('<li></li>');
+							var fileName = $('<li></li>');
+							var time = $('<li></li>');
+
+							title.text(obj[x].arr[y].title);
+							fileName.text(obj[x].arr[y].fileName);
+							time.text(obj[x].arr[y].time);
+
+							title.addClass('li-border-top');
+
+							arrBox.append(title);
+							arrBox.append(fileName);
+							arrBox.append(time);
+
+						}
+						ul.append(arrUl);
+					}
+					$('.syso').append(ul);
+
+				}
+
+			}
+			$(document).on('click', '.type', function() {
+				$('#Type').val($(this).text());
+			})
+
+			$(document).on('click', '#sx', function() {
+				location.reload(true);
+
+			})
+			$(document).on('click', '#addType', function() {
+				var TypeName = $('#TypeName').val();
+				var TypeTitle = $('#TypeTitle').val();
+				var TypeInfo = $('#TypeInfo').val();
+
+				fs.readFile('list_arr.json', function(err, data) {
+					if(err) {
+						alert('错误！');
+						return;
+					}
+					var obj = eval("(" + data.toString() + ")"); //转换json
+
+					if(TypeName == 'hr') {
+						obj[TypeName] = {};
+					} else {
+
+						obj[TypeName] = {};
+						obj[TypeName].head = {};
+						obj[TypeName].arr = [];
+
+						obj[TypeName].head.title = TypeTitle;
+						obj[TypeName].head.info = TypeInfo;
+					}
+					//					obj[TypeName].head.title = Title;
+					//===
+					fs.writeFile('list_arr.json', JSON.stringify(obj), function(err) {
+						if(err) {
+							return console.error(err);
+						}
+						alert("数据写入成功！");
+						location.reload(true);
+					});
+
+					//===
+				});
+
+			})
+
+			$(document).on('click', '#addNode', function() {
+
+				var Type = $('#Type').val();
+				var Title = $('#Title').val();
+				var fileName = $('#fileName').val();
+				var time = $('#time').val();
+
+				fs.readFile('list_arr.json', function(err, data) {
+					if(err) {
+						alert('错误！');
+						return;
+					}
+					var obj = eval("(" + data.toString() + ")"); //转换json
+					var length = obj[Type].arr.length;
+					obj[Type].arr[length] = {};
+					obj[Type].arr[length].title = Title;
+					obj[Type].arr[length].fileName = fileName;
+					obj[Type].arr[length].time = time;
+					//===
+					fs.writeFile('list_arr.json', JSON.stringify(obj), function(err) {
+						if(err) {
+							return console.error(err);
+						}
+						alert("数据写入成功！");
+						location.reload(true);
+					});
+				});
+
+			})
+		</script>
+	</body>
+
+</html>

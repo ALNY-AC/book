@@ -1,0 +1,28 @@
+{
+	"Java": {
+		"head": {
+			"title": "Java技巧大全",
+			"info": "Java的技巧"
+		},
+		"arr": [
+			{
+				"title": "Java的基础",
+				"fileName": "Java.html",
+				"time": "2017-4-18"
+			}
+		]
+	},
+	"JQ": {
+		"head": {
+			"title": "JQuery",
+			"info": "JQuery的技巧"
+		},
+		"arr": [
+			{
+				"title": "JQ的一些技巧",
+				"fileName": "JQ.html",
+				"time": "2017-4-18"
+			}
+		]
+	}
+}

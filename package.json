@@ -1,0 +1,14 @@
+{
+	"name": "origin-plan-book",
+	"main": "index.html",
+
+	"window": {
+		//		"title": "node-webkit demo",
+		//		"icon": "link.png",
+		"toolbar": true,
+		"frame": true,
+		"width": 1024,
+		"height": 768,
+		"position": "center"
+	}
+}

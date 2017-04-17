@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<title>起源手册——文章</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+		<style type="text/css">
+			* {
+				font-family: "微软雅黑";
+			}
+			
+			.Tool {
+				position: absolute;
+				width: 73px;
+				padding-left: 10px;
+				padding-right: 10px;
+				height: 100vh;
+				background-color: #f8f8f8;
+				border-right: solid 1px #ddd;
+				overflow: auto;
+				float: left;
+				z-index: 10;
+			}
+			
+			.icon {
+				font-size: 30px;
+				color: #333;
+				padding-bottom: 30px;
+				padding-top: 20px;
+			}
+			
+			.icon a {
+				color: #807F83;
+			}
+			
+			.icon a:active {}
+			
+			.tool-btn {
+				display: block;
+				margin: 10px auto;
+				width: 40px;
+				height: 40px;
+				background-color: #fff;
+				border-radius: 50px;
+				border: solid 1px #2dbe60;
+				-webkit-transition: all 0.2s;
+				-moz-transition: all 0.2s;
+				-ms-transition: all 0.2s;
+				-o-transition: all 0.2s;
+				transition: all 0.2s;
+				color: #2dbe60;
+			}
+			
+			.tool-btn:hover {
+				background-color: #2dbe60;
+				color: #fff;
+			}
+			
+			.list {
+				position: absolute;
+				width: 350px;
+				height: 100vh;
+				background-color: #fff;
+				border-right: solid 1px #ddd;
+				left: 73px;
+				z-index: 10;
+				overflow: auto;
+			}
+			
+			.info {
+				position: absolute;
+				width: 100%;
+				height: 100vh;
+				background-color: #fff;
+				z-index: 1;
+				padding-left: 443px;
+				border: none;
+				-webkit-transition: all 0.2s;
+				-moz-transition: all 0.2s;
+				-ms-transition: all 0.2s;
+				-o-transition: all 0.2s;
+				transition: all 0.2s;
+			}
+			
+			.info-a {
+				padding-left: 743px;
+			}
+			
+			.list-group {
+				cursor: pointer;
+			}
+			
+			:last-child.list-group-item,
+			:first-child.list-group-item {
+				border-left: none;
+				border-right: none;
+				border-radius: 0;
+			}
+			
+			li.list-group-item {
+				border-left: none;
+				border-right: none;
+				border-radius: 0;
+			}
+			
+			.list-group-item:hover {
+				background-color: #2dbe60;
+				color: #fff;
+				-webkit-transition: all 0.2s;
+				-moz-transition: all 0.2s;
+				-ms-transition: all 0.2s;
+				-o-transition: all 0.2s;
+				transition: all 0.2s;
+			}
+			
+			.list-group-item:hover .list-time {
+				-webkit-transition: all 0.2s;
+				-moz-transition: all 0.2s;
+				-ms-transition: all 0.2s;
+				-o-transition: all 0.2s;
+				transition: all 0.2s;
+				color: #fff;
+			}
+			
+			.list-title {
+				font-size: 20px;
+			}
+			
+			.list-time {
+				color: #777;
+			}
+			
+			.list-head {
+				padding-top: 20px;
+				color: #777;
+				height: 100px;
+				padding-left: 15px;
+			}
+			
+			.list-head .list-title {
+				font-weight: bold;
+				font-size: 30px;
+			}
+			
+			.ml {
+				cursor: pointer;
+				position: fixed;
+				z-index: 12;
+				left: 380px;
+				/*left: 357px;*/
+				top: 30px;
+				text-align: center;
+				font-size: 14px;
+				padding: 2px 5px;
+				background-color: #2dbe60;
+				color: #fff;
+				border-radius: 3px;
+			}
+			
+			.ml-box {
+				position: absolute;
+				width: 0;
+				height: 100vh;
+				background-color: #2dbe60;
+				/*f8f8f8*/
+				z-index: 11;
+				left: 423px;
+				-webkit-transition: all 0.2s;
+				-moz-transition: all 0.2s;
+				-ms-transition: all 0.2s;
+				-o-transition: all 0.2s;
+				transition: all 0.2s;
+				border: none;
+				color: #fff;
+				overflow: hidden;
+				/* For Latest Opera */
+				box-shadow: 0 0 20px 0 #000;
+				-webkit-box-shadow: 0 0 20px 0 #000;
+				-moz-box-shadow: 0 0 20px 0 #000;
+				box-shadow: 0 0 20px 0 #000;
+			}
+			
+			.ml-box li {
+				line-height: 20px;
+				list-style: none;
+			}
+			
+			.ml-box ul {
+				padding-left: 20px;
+			}
+			
+			.ml-box a {
+				color: #fff;
+			}
+			
+			.ml-box-a {
+				width: 300px;
+			}
+			
+			.ac {
+				background-color: #2dbe60;
+				color: #fff;
+			}
+			
+			.ac * {
+				color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="Tool">
+			<div class="text-center icon">
+				<a href="#">
+					<span class="glyphicon glyphicon-book"></span>
+				</a>
+			</div>
+
+		</div>
+
+		<div class="list"></div>
+		<div class="ml">
+			<span class="">显示目录</span>
+		</div>
+
+		<div class="ml-box">
+		</div>
+
+		<iframe src="" id="Frame" class="info">
+
+			<h1>Title</h1>
+			<h2>Title</h2>
+			<h3>Title</h3>
+			<h4>Title</h4>
+			<h5>Title</h5>
+			<h6>Title</h6>
+
+		</iframe>
+
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="js/config.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="js/list.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/menu.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var list_arr;
+
+			$.getJSON('list_arr.json', function(r) {
+				list_arr = r;
+				//	alert(1);
+
+				for(x in list_arr) {
+					console.log(x);
+
+					if(x == "hr") {
+						var hr = $('<hr />');
+						$('.Tool').append(hr);
+					} else {
+
+						var btn = $('<button></button>');
+						btn.addClass('tool-btn');
+						btn.attr('id', x);
+						btn.text(x);
+						$('.Tool').append(btn);
+
+					}
+
+				}
+				console.log(list_arr);
+
+				show('JQ');
+			})
+
+			$(document).on('click', '.tool-btn', function() {
+
+				show($(this).text());
+
+			})
+			$(document).on('click', '.ml', function() {
+				$('.ml-box').toggleClass('ml-box-a');
+				$('.info').toggleClass('info-a');
+
+			})
+
+			$(document).on('click', '.list-group-item', function() {
+
+				$('.list-group-item').removeClass('ac');
+				$(this).addClass('ac');
+
+				var list = $(this);
+
+				var wzUrl = 'resources/wz/' + list.attr('id');
+
+				$('.info').attr('src', wzUrl);
+				$('.hUrl').remove();
+				$('.ml-box').empty();
+				$('iframe').ready(function() {
+
+					setTimeout(function() {
+
+						b($(".info").contents().find("body"), '.ml-box');
+						var wzUrl = $('.info').attr('src');
+						$(".hUrl").each(function() {
+
+							$(this).on('click', function() {
+								var a = $(this);
+								$('.info').attr('src', wzUrl + a.attr('href'));
+								console.log('连接地址：' + $('.info').attr('src'));
+							});
+
+						});
+					}, 100)
+
+				})
+
+			})
+
+			function show(text) {
+
+				$('.tool-btn').removeClass('ac');
+				$('#' + text).addClass('ac');
+
+				var div = $('<div></div>');
+				div.attr('id', text);
+				console.log(list_arr[text]);
+
+				var head = $('<div></div>');
+				var headTitle = $('<div></div>');
+				var p = $('<div></div>');
+
+				head.addClass('list-head');
+				headTitle.addClass('list-title');
+
+				headTitle.text(list_arr[text].head.title);
+				p.text(list_arr[text].head.info);
+
+				head.append(headTitle);
+				head.append(p);
+
+				var arr = list_arr[text].arr;
+				var ul = $('<ul></ul>');
+				ul.addClass('list-group');
+
+				for(var i = 0; i < arr.length; i++) {
+
+					var li = $('<li></li>');
+
+					var listTitle = $('<div></div>');
+					var listTime = $('<div></div>');
+
+					li.addClass('list-group-item');
+					listTitle.addClass('list-title');
+					listTime.addClass('list-time');
+
+					li.attr('id', arr[i].fileName);
+					listTitle.text(arr[i].title);
+					listTime.text(arr[i].time);
+
+					li.append(listTitle);
+					li.append(listTime);
+
+					ul.append(li);
+
+				}
+
+				div.append(head);
+				div.append(ul);
+				$('.list').html(div);
+
+			}
+
+			function showML() {
+
+			}
+		</script>
+	</body>
+
+</html>
