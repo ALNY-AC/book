@@ -5,4 +5,5 @@
 
 项目展示地址：https://alny-ac.github.io/
 
-下载地址：https://alny-ac.github.io/resources/download/book.zip
+离线版下载地址：https://alny-ac.github.io/resources/download/book.zip
+离线版可拖拽文件到文章管理器中，但并不能实现添加操作，只有在我的电脑上才能实现添加。
