@@ -1,6 +1,6 @@
 # BOOK
 技术手册
 施工中……
-项目预览地址：https://alny-ac.github.io/BOOK/index.html
+项目预览地址：https://alny-ac.github.io/book/index.html
 
 这个工具在本地才能添加，目前有BUG，而且技术资料不完善，正在施工添加……
